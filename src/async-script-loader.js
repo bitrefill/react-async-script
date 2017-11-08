@@ -157,9 +157,7 @@ export default function makeAsyncScript(Component, scriptURL, options) {
     if (!mapEntry || !mapEntry.loaded) {
       throw new Error("Script is not loaded.");
     }
-    for (let observer of mapEntry.observers.values()) {
-      observer(mapEntry);
-    }
+    mapEntry.observers.forEach(observer => observer(mapEntry));
     delete window[options.callbackName];
   };
 
