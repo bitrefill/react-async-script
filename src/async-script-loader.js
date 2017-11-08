@@ -162,13 +162,13 @@ export default function makeAsyncScript(Component, scriptURL, options) {
   };
 
   if (options.exposeFuncs) {
-    for (let funcToExpose of options.exposeFuncs) {
+    options.exposeFuncs.forEach(funcToExpose => {
       /* eslint-disable no-loop-func */
       AsyncScriptLoader.prototype[funcToExpose] = function() {
         return this.getComponent()[funcToExpose](...arguments);
       };
       /* eslint-enable no-loop-func */
-    }
+    });
   }
   return AsyncScriptLoader;
 }
